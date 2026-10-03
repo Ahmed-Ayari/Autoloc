@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table
@@ -36,4 +37,7 @@ public class Client {
 
     @Column(nullable = false)
     private LocalDate dateInscription;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private Set<Reservation> reservations;
 }
