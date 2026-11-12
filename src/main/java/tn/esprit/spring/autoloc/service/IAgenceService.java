@@ -1,0 +1,12 @@
+package tn.esprit.spring.autoloc.service;
+
+import tn.esprit.spring.autoloc.entity.Agence;
+import java.util.List;
+
+public interface IAgenceService {
+    Agence creer(Agence agence);
+    Agence obtenirParId(Long id);
+    List<Agence> listerTous();
+    Agence mettreAJour(Agence agence);
+    void supprimer(Long id);
+}
