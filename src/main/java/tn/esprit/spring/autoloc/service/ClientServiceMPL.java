@@ -2,8 +2,10 @@ package tn.esprit.spring.autoloc.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.spring.autoloc.entity.CategorieVehicule;
 import tn.esprit.spring.autoloc.entity.Client;
+import tn.esprit.spring.autoloc.entity.Reservation;
 import tn.esprit.spring.autoloc.repository.ClientRepository;
 
 import java.util.List;
@@ -41,5 +43,16 @@ public class ClientServiceMPL implements IClientService {
     @Override
     public List<Client> recupererParNomPrenomEtCategorieVehicule(String nom, String prenom, CategorieVehicule cv){
         return clientRepository.findDistinctByNomAndPrenomAndReservations_Vehicule_Categorie(nom, prenom, cv);
+    }
+
+    @Override
+    @Transactional
+    public Client ajouterClientEtReservation(Client client) {
+        if (client.getReservations() != null) {
+            for (Reservation reservation : client.getReservations()) {
+                reservation.setClient(client);
+            }
+        }
+        return clientRepository.save(client);
     }
 }

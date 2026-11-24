@@ -12,4 +12,5 @@ public interface IClientService {
     void supprimer(Long id);
 
     List<Client> recupererParNomPrenomEtCategorieVehicule (String nom, String prenom, CategorieVehicule cv);
+    Client ajouterClientEtReservation(Client client);
 }

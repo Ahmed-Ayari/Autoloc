@@ -1,5 +1,6 @@
 package tn.esprit.spring.autoloc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +32,9 @@ public class Reservation {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnore
     private Client client;
 
-    @OneToOne(mappedBy = "reservation", optional = false)
+    @OneToOne(mappedBy = "reservation", optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
     private Contrat contrat;
 }

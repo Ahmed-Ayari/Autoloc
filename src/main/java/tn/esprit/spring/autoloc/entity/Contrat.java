@@ -31,6 +31,7 @@ public class Contrat {
     private BigDecimal montantTotal;
 
     private Boolean valide;
+    @JsonIgnore
     @OneToOne(optional = false)
     private Reservation reservation;
 

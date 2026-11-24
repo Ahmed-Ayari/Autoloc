@@ -7,7 +7,6 @@ import tn.esprit.spring.autoloc.entity.CategorieVehicule;
 import tn.esprit.spring.autoloc.entity.Client;
 import tn.esprit.spring.autoloc.entity.Contrat;
 import tn.esprit.spring.autoloc.service.IClientService;
-import tn.esprit.spring.autoloc.service.IContratService;
 
 import java.util.List;
 
@@ -16,36 +15,40 @@ import java.util.List;
 @RequestMapping("/Client")
 @Tag(name = "Gestion Client")
 public class ClientController {
-    private IContratService contratService;
     private IClientService clientService;
 
     @PostMapping("/Create")
-    public Contrat creer(@RequestBody Contrat contrat) {
-        return contratService.creer(contrat);
+    public Client creer(@RequestBody Client client) {
+        return clientService.creer(client);
     }
 
     @GetMapping("Get-By-id")
-    public Contrat obtenirParId(Long id) {
-        return contratService.obtenirParId(id);
+    public Client obtenirParId(Long id) {
+        return clientService.obtenirParId(id);
     }
 
     @GetMapping("/GetAll")
-    public List<Contrat> listerTous() {
-        return contratService.listerTous();
+    public List<Client> listerTous() {
+        return clientService.listerTous();
     }
 
     @PutMapping("/Update")
-    public Contrat mettreAJour(Contrat contrat) {
-        return contratService.mettreAJour(contrat);
+    public Client mettreAJour(Client client) {
+        return clientService.mettreAJour(client);
     }
 
     @DeleteMapping("/Delete")
     public void supprimer(Long id) {
-        contratService.supprimer(id);
+        clientService.supprimer(id);
     }
 
     @GetMapping("/getByNomPrenomCv/{nom}/{prenom}/{cv}")
     public List<Client> recupererParNomEtCategorieVehicule(@PathVariable String nom, @PathVariable String prenom, @PathVariable CategorieVehicule cv){
         return clientService.recupererParNomPrenomEtCategorieVehicule(nom, prenom, cv);
+    }
+
+    @PostMapping("/ajouterClientEtReservation")
+    public Client ajouterClientEtReservation(@RequestBody Client client) {
+        return clientService.ajouterClientEtReservation(client);
     }
 }

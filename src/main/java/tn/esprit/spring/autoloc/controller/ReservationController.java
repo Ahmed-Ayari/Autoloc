@@ -34,4 +34,9 @@ public class ReservationController {
     public void supprimer(Long id) {
         reservationService.supprimer(id);
     }
+
+    @PostMapping("/ajouterReservationContrat")
+    public Reservation ajouterReservationContrat(@RequestBody Reservation reservation) {
+        return reservationService.ajouterReservationContrat(reservation);
+    }
 }
